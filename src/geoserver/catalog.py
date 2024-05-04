@@ -617,6 +617,7 @@ class Catalog(object):
             "RPFTOC",
             "RST",
             "VRT",
+            "NetCDF", ###
         ]
 
         if type is None:
@@ -638,7 +639,9 @@ class Catalog(object):
             cs = UnsavedCoverageStore(self, name, workspace)
             cs.type = type
             cs.url = path if path.startswith("file:") else f"file:{path}"
-            self.save(cs)
+            if not overwrite: ######
+                self.save(cs) ######
+            #self.save(cs)
 
             if create_layer:
                 if layer_name is None:
